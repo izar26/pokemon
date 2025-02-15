@@ -1,0 +1,26 @@
+/* @import './base.css'; */
+@import 'tailwindcss';
+
+#app {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+#app {
+  /* display: grid; */
+  grid-template-columns: 1fr 1fr;
+  padding: 0 2rem;
+}
+
+/* Contoh di main.css atau di Tailwind base layer */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #e6e9f1;
+}
