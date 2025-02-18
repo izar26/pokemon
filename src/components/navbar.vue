@@ -50,7 +50,7 @@ const catchCount = computed(() => collection.value.length)
             class="card-catch px-5 py-2 bg-sky-200 rounded-full hover:bg-yellow-400 flex items-center justify-between"
           >
             <router-link :to="'/'" class="flex items-center">
-              <p class="font-semi">{{ catchCount }} catch</p>
+              <p class="font-semi">catch</p>
               <img src="../assets/img/logo-catch.png" alt="catch" :class="classCatch" />
             </router-link>
           </div>
@@ -59,7 +59,7 @@ const catchCount = computed(() => collection.value.length)
           >
             <!-- Tombol tambahan untuk menuju halaman Collection -->
             <router-link to="/collection" class="flex items-center">
-              <p class="font-semi">Collection</p>
+              <p class="font-semi">{{ catchCount }} Collection</p>
               <img src="../assets/img/logo-catch.png" alt="collection" :class="classCatch" />
             </router-link>
           </div>

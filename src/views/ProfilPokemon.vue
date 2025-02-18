@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ backgroundColor: backgroundColor }" class="min-h-screen rounded-2xl">
+  <div :style="{ backgroundColor: backgroundColor }" class="h-full rounded-2xl mb-10">
     <div class="container mx-5 lg:mx-24">
       <div v-if="errorMessage" class="text-red-500 text-center my-4">{{ errorMessage }}</div>
       <main v-if="pokemon" class="mb-8 -mt-8 lg:-mt-20">
@@ -12,13 +12,19 @@
                   <img src="../assets/img/logo-bg.png" alt="pokeball" />
                 </div>
                 <div class="absolute bottom-0 left-24">
-                  <img src="https://pokedex-power.vercel.app/assets/dots.svg" alt="dots" class="w-24" />
+                  <img
+                    src="https://pokedex-power.vercel.app/assets/dots.svg"
+                    alt="dots"
+                    class="w-24"
+                  />
                 </div>
                 <div class="text-center">
                   <p class="font-semi">#{{ pokemon.id.toString().padStart(4, '0') }}</p>
                   <div class="flex items-center justify-center">
                     <img src="../assets/img/pokeSmall.png" alt="pokesmall" class="mr-2" />
-                    <p class="font-extra text-3xl tracking-widest text-black-0">{{ pokemon.name }}</p>
+                    <p class="font-extra text-3xl tracking-widest text-black-0">
+                      {{ pokemon.name }}
+                    </p>
                   </div>
                 </div>
                 <div class="flex items-center justify-center">
@@ -180,7 +186,11 @@
         <div v-if="catchInProgress" class="text-center">
           <p class="font-semi mb-4">Sedang menangkap Pokémon...</p>
           <!-- Gambar animasi menangkap, misalnya gambar yang berputar atau melompat -->
-          <img src="../assets/img/logo-catch.png" alt="catching" class="w-20 mx-auto animate-spin" />
+          <img
+            src="../assets/img/logo-catch.png"
+            alt="catching"
+            class="w-20 mx-auto animate-spin"
+          />
         </div>
         <div v-else>
           <div v-if="modalPokemon">
@@ -190,26 +200,17 @@
               <p class="text-sm">Tipe: {{ modalPokemon.types.join(', ') }}</p>
             </div>
             <div class="flex justify-around">
-              <button
-                @click="capturePokemon"
-                class="px-4 py-2 bg-green-400 rounded-lg text-white"
-              >
+              <button @click="capturePokemon" class="px-4 py-2 bg-green-400 rounded-lg text-white">
                 Tangkap
               </button>
-              <button
-                @click="closeModal"
-                class="px-4 py-2 bg-red-400 rounded-lg text-white"
-              >
+              <button @click="closeModal" class="px-4 py-2 bg-red-400 rounded-lg text-white">
                 Lepaskan
               </button>
             </div>
           </div>
           <div v-else class="text-center">
             <p class="font-semi mb-4">Gagal menangkap! Pokémon lolos.</p>
-            <button
-              @click="closeModal"
-              class="px-4 py-2 bg-red-400 rounded-lg text-white"
-            >
+            <button @click="closeModal" class="px-4 py-2 bg-red-400 rounded-lg text-white">
               Tutup
             </button>
           </div>

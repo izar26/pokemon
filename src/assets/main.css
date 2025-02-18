@@ -24,3 +24,9 @@ body {
   min-height: 100vh;
   background-color: #e6e9f1;
 }
+
+body, main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
