@@ -1,3 +1,4 @@
+<!-- src/views/ProfilPokemon.vue -->
 <template>
   <div :style="{ backgroundColor: backgroundColor }" class="h-full rounded-2xl mb-10">
     <div class="container mx-5 lg:mx-24">
@@ -33,7 +34,7 @@
               </div>
             </div>
             <div class="flex items-center justify-center mt-6 lg:mt-4">
-              <!-- Tombol Catch: klik akan memicu attemptCatch -->
+              <!-- Tombol Catch -->
               <div
                 class="card-catch px-5 py-2 rounded-2xl bg-sky-100 hover:bg-yellow-400 flex items-center justify-between cursor-pointer"
                 @click="attemptCatch"
@@ -47,63 +48,36 @@
               </div>
             </div>
           </div>
-
           <!-- Bagian Tab Detail -->
           <div class="bg-white rounded-2xl my-5 card w-full lg:w-9/12 px-6 py-3">
+            <!-- Switch Tabs -->
             <div class="mb-8 bg-white rounded-2xl shadow-2xl">
               <div class="home-switch flex justify-around items-center px-1 py-2">
                 <div
                   @click="activeTab = 'about'"
-                  :class="[
-                    'cursor-pointer',
-                    'py-1',
-                    'px-5',
-                    'rounded-2xl',
-                    { 'home-switch-active bg-yellow-400': activeTab === 'about' },
-                  ]"
-                >
-                  About
-                </div>
+                  :class="['cursor-pointer','py-1','px-5','rounded-2xl',{ 'home-switch-active bg-yellow-400': activeTab==='about' }]"
+                >About</div>
                 <div
                   @click="activeTab = 'status'"
-                  :class="[
-                    'cursor-pointer',
-                    'py-1',
-                    'px-5',
-                    'rounded-2xl',
-                    { 'home-switch-active bg-yellow-400': activeTab === 'status' },
-                  ]"
-                >
-                  Status
-                </div>
+                  :class="['cursor-pointer','py-1','px-5','rounded-2xl',{ 'home-switch-active bg-yellow-400': activeTab==='status' }]"
+                >Status</div>
                 <div
                   @click="activeTab = 'moves'"
-                  :class="[
-                    'cursor-pointer',
-                    'py-1',
-                    'px-5',
-                    'rounded-2xl',
-                    { 'home-switch-active bg-yellow-400': activeTab === 'moves' },
-                  ]"
-                >
-                  Moves
-                </div>
+                  :class="['cursor-pointer','py-1','px-5','rounded-2xl',{ 'home-switch-active bg-yellow-400': activeTab==='moves' }]"
+                >Moves</div>
               </div>
             </div>
 
-            <div v-if="activeTab === 'about'" class="tab-content">
-              <!-- Konten About (tetap sama dengan style Anda) -->
+            <!-- About Tab -->
+            <div v-if="activeTab==='about'" class="tab-content">
               <div class="grid grid-cols-3 gap-3 mb-5 lg:mb-3">
                 <p class="font-semi">Types</p>
                 <div class="col-span-2 flex items-center">
                   <div
-                    v-for="(type, index) in pokemon.types"
-                    :key="index"
+                    v-for="(type, i) in pokemon.types" :key="i"
                     :class="`type-${type}`"
                     class="bg-gray-300 px-3 text-base text-black-0 rounded-md mr-2"
-                  >
-                    {{ type }}
-                  </div>
+                  >{{ type }}</div>
                 </div>
               </div>
               <div class="grid grid-cols-3 gap-3 mb-5 lg:mb-3">
@@ -116,16 +90,11 @@
               </div>
               <div class="grid grid-cols-3 gap-3 mb-1">
                 <p class="font-semi">Abilities</p>
-                <div class="col-span-2">
-                  <div class="flex flex-wrap">
-                    <div
-                      v-for="(ability, index) in pokemon.abilities"
-                      :key="index"
-                      class="bg-yellow-200 px-3 text-base text-black-0 rounded-md mr-2 mb-2"
-                    >
-                      {{ ability }}
-                    </div>
-                  </div>
+                <div class="col-span-2 flex flex-wrap">
+                  <div
+                    v-for="(ab, i) in pokemon.abilities" :key="i"
+                    class="bg-yellow-200 px-3 text-base text-black-0 rounded-md mr-2 mb-2"
+                  >{{ ab }}</div>
                 </div>
               </div>
               <div class="grid grid-cols-3 gap-3 mb-5 lg:mb-3">
@@ -138,9 +107,13 @@
               </div>
             </div>
 
-            <div v-if="activeTab === 'status'" class="tab-content">
+            <!-- Status Tab -->
+            <div v-if="activeTab==='status'" class="tab-content">
               <div class="w-full lg:px-10">
-                <div class="mb-5 lg:mb-3" v-for="(stat, index) in orderedStats" :key="index">
+                <div
+                  v-for="(stat, i) in orderedStats" :key="i"
+                  class="mb-5 lg:mb-3"
+                >
                   <div class="flex items-center justify-between mb-1">
                     <div class="flex items-center">
                       <img :src="getStatIcon(stat.stat.name)" alt="stat-icon" class="mr-2" />
@@ -158,21 +131,22 @@
               </div>
             </div>
 
-            <div v-if="activeTab === 'moves'" class="tab-content">
+            <!-- Moves Tab -->
+            <div v-if="activeTab==='moves'" class="tab-content">
               <div class="overflow-y-scroll moves-scroll h-80 -mr-3">
                 <div class="grid grid-rows-1 grid-cols-2 lg:grid-cols-3 gap-5 mb-3 pr-3">
                   <div
-                    v-for="(move, index) in pokemon.moves"
-                    :key="index"
+                    v-for="(mv, i) in pokemon.moves" :key="i"
                     class="border border-dashed py-2 hover:border-yellow-400"
                   >
-                    <p class="text-center text-sm">{{ move.move.name }}</p>
+                    <p class="text-center text-sm">{{ mv.move.name }}</p>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
-          <!-- End Bagian Tab -->
+          <!-- End Tab Detail -->
         </div>
       </main>
     </div>
@@ -185,7 +159,6 @@
       <div class="bg-white p-6 rounded-2xl w-80">
         <div v-if="catchInProgress" class="text-center">
           <p class="font-semi mb-4">Sedang menangkap Pokémon...</p>
-          <!-- Gambar animasi menangkap, misalnya gambar yang berputar atau melompat -->
           <img
             src="../assets/img/logo-catch.png"
             alt="catching"
@@ -217,6 +190,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -224,7 +198,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-// Import icon gambar untuk masing-masing stat
+// icon stat
 import hpIcon from './../assets/img/hp.png'
 import attackIcon from './../assets/img/attack.png'
 import defenseIcon from './../assets/img/defense.png'
@@ -234,232 +208,144 @@ import speedIcon from './../assets/img/speed.png'
 
 const route = useRoute()
 const router = useRouter()
+
 const pokemon = ref(null)
 const errorMessage = ref('')
-const activeTab = ref('about') // default adalah About
-// currentPage tidak lagi digunakan karena kita akan pindah route ke koleksi
+const activeTab = ref('about')
 
-// Modal catch & collection
+// modal & catch
 const showModal = ref(false)
 const catchInProgress = ref(false)
 const modalPokemon = ref(null)
 
-// Fungsi untuk menghitung lebar progress bar, asumsikan max stat = 200
-const calculateWidth = (base_stat) => {
-  return (base_stat / 200) * 100 + '%'
+// ** fungsi progress bar **
+const calculateWidth = (base) => {
+  return ((base / 200) * 100) + '%'
 }
 
-// Fungsi untuk mengkapitalkan huruf pertama dari stat name
-const capitalize = (str) => {
-  if (!str) return ''
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
+// kapitalisasi
+const capitalize = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1) : ''
 
-// Fungsi untuk mendapatkan icon untuk setiap stat
-const getStatIcon = (statName) => {
-  switch (statName) {
-    case 'hp':
-      return hpIcon
-    case 'attack':
-      return attackIcon
-    case 'defense':
-      return defenseIcon
-    case 'special-attack':
-      return specialAttackIcon
-    case 'special-defense':
-      return specialDefenseIcon
-    case 'speed':
-      return speedIcon
-    default:
-      return ''
+// icon stat
+const getStatIcon = (name) => {
+  switch(name) {
+    case 'hp': return hpIcon
+    case 'attack': return attackIcon
+    case 'defense': return defenseIcon
+    case 'special-attack': return specialAttackIcon
+    case 'special-defense': return specialDefenseIcon
+    case 'speed': return speedIcon
+    default: return ''
   }
 }
 
+// ambil detail
 async function fetchPokemonByName(name) {
   try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    if (!response.ok) throw new Error('Gagal mengambil data Pokémon!')
-    const data = await response.json()
-    const totalStats = data.stats.reduce((acc, stat) => acc + stat.base_stat, 0)
-    const averageStats = totalStats / data.stats.length
+    const res = await fetch(`https://pokemon-backend-production-655f.up.railway.app/pokemon/name/${name}`, {
+      headers:{ 'x-user-id': localStorage.getItem('device-id')||'' }
+    })
+    if(!res.ok) throw new Error('Gagal ambil data')
+    const d = await res.json()
+    const total = d.stats.reduce((a,s)=>a+s.base_stat,0)
     pokemon.value = {
-      id: data.id,
-      name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
-      image: data.sprites.other['official-artwork'].front_default || '/default.png',
-      types: data.types.map((t) => t.type.name),
-      height: `${data.height / 10} (M)`,
-      weight: `${data.weight / 10} (KG)`,
-      abilities: data.abilities.map((a) => a.ability.name),
-      experience: data.base_experience,
-      moves: data.moves,
-      stats: data.stats,
-      averageStats: averageStats.toFixed(2),
+      ...d,
+      name: capitalize(d.name),
+      averageStats: (total/d.stats.length).toFixed(2)
     }
-  } catch (error) {
-    errorMessage.value = 'Error fetching Pokémon data.'
-    console.error(error)
+  } catch(e) {
+    errorMessage.value = e.message
   }
 }
 
-onMounted(() => {
-  // Pastikan parameter rute sesuai, misalnya "name"
-  fetchPokemonByName(route.params.name)
-})
-
-// Computed untuk background halaman berdasarkan tipe pertama Pokémon
-const backgroundColor = computed(() => {
-  if (!pokemon.value) return '#ffffff'
-  const type = pokemon.value.types[0]
-  switch (type) {
-    case 'grass':
-      return '#78C850'
-    case 'fire':
-      return '#F08030'
-    case 'water':
-      return '#6890F0'
-    case 'electric':
-      return '#F8D030'
-    case 'psychic':
-      return '#F85888'
-    case 'ice':
-      return '#98D8D8'
-    case 'dragon':
-      return '#7038F8'
-    case 'dark':
-      return '#705848'
-    case 'fairy':
-      return '#EE99AC'
-    default:
-      return '#A8A878'
-  }
-})
-
-// Computed untuk mengurutkan stats agar tampil sesuai urutan: hp, attack, defense, special-attack, special-defense, speed
-const orderedStats = computed(() => {
-  if (!pokemon.value) return []
-  const order = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed']
-  return order
-    .map((statName) => pokemon.value.stats.find((s) => s.stat.name === statName))
-    .filter(Boolean)
-})
-
-// --- Fitur Catch ---
-
+// gacha
 async function attemptCatch() {
   showModal.value = true
   catchInProgress.value = true
-  // Tampilkan animasi catch selama 3 detik
-  setTimeout(async () => {
+  setTimeout(async ()=>{
     catchInProgress.value = false
-    // Kesempatan menangkap dinaikkan menjadi 90%
-    const success = Math.random() < 0.9
-    if (success) {
-      modalPokemon.value = await fetchRandomPokemon()
-    } else {
-      modalPokemon.value = null
-    }
-    // Jika gagal, modal tetap terbuka (user harus klik tombol "Tutup")
+    const ok = Math.random()<0.9
+    modalPokemon.value = ok
+      ? await fetchRandomPokemon()
+      : null
   }, 3000)
 }
 
 async function fetchRandomPokemon() {
-  const randomId = Math.floor(Math.random() * 898) + 1
-  try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
-    if (!response.ok) throw new Error('Gagal mengambil data Pokémon acak')
-    const data = await response.json()
-    const totalStats = data.stats.reduce((acc, stat) => acc + stat.base_stat, 0)
-    const averageStats = totalStats / data.stats.length
-    return {
-      id: data.id,
-      name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
-      image: data.sprites.other['official-artwork'].front_default || '/default.png',
-      types: data.types.map((t) => t.type.name),
-      height: `${data.height / 10} (M)`,
-      weight: `${data.weight / 10} (KG)`,
-      abilities: data.abilities.map((a) => a.ability.name),
-      experience: data.base_experience,
-      moves: data.moves,
-      stats: data.stats,
-      averageStats: averageStats.toFixed(2),
-    }
-  } catch (error) {
-    console.error(error)
-    return null
+  const id = Math.floor(Math.random()*898)+1
+  const res = await fetch(`https://pokemon-backend-production-655f.up.railway.app/pokemon/${id}`, {
+    headers:{ 'x-user-id': localStorage.getItem('device-id')||'' }
+  })
+  return res.ok ? await res.json() : null
+}
+
+async function capturePokemon() {
+  if(!modalPokemon.value) return
+  // simpan ke DB
+  await fetch('https://pokemon-backend-production-655f.up.railway.app/pokemon/caught',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-user-id': localStorage.getItem('device-id')||''
+    },
+    body: JSON.stringify({
+      pokemonId: modalPokemon.value.id,
+      name: modalPokemon.value.name,
+      image: modalPokemon.value.image,
+      types: modalPokemon.value.types,
+      height: modalPokemon.value.height,
+      weight: modalPokemon.value.weight,
+      abilities: modalPokemon.value.abilities,
+      experience: modalPokemon.value.experience
+    })
+  })
+  closeModal()
+  router.push({ name:'Collection' })
+}
+
+function closeModal(){
+  showModal.value=false
+  modalPokemon.value=null
+}
+
+// background berdasarkan tipe
+const backgroundColor = computed(()=>{
+  const t = pokemon.value?.types[0]
+  const map={
+    grass:'#78C850', fire:'#F08030', water:'#6890F0',
+    electric:'#F8D030', psychic:'#F85888', ice:'#98D8D8',
+    dragon:'#7038F8', dark:'#705848', fairy:'#EE99AC'
   }
-}
+  return map[t]||'#A8A878'
+})
 
-function capturePokemon() {
-  if (modalPokemon.value) {
-    addToCollection(modalPokemon.value)
-    closeModal()
-    // Setelah berhasil, pindah ke halaman koleksi
-    router.push({ name: 'Collection' })
-  }
-}
+// urut stats
+const orderedStats = computed(()=>{
+  if(!pokemon.value) return []
+  const ord=['hp','attack','defense','special-attack','special-defense','speed']
+  return ord
+    .map(n=>pokemon.value.stats.find(s=>s.stat.name===n))
+    .filter(Boolean)
+})
 
-function closeModal() {
-  showModal.value = false
-  modalPokemon.value = null
-}
-
-// --- Fitur Koleksi ---
-const collection = ref([])
-
-function addToCollection(pokemonData) {
-  const captureTime = new Date().getTime()
-  const caughtPokemon = { ...pokemonData, captureTime }
-  // Masukkan di awal array agar yang terbaru tampil di atas
-  collection.value.unshift(caughtPokemon)
-  localStorage.setItem('collection', JSON.stringify(collection.value))
-}
-
-function loadCollection() {
-  const saved = localStorage.getItem('collection')
-  if (saved) {
-    collection.value = JSON.parse(saved)
-  }
-}
-
-onMounted(() => {
-  loadCollection()
+// on mount
+onMounted(()=>{
+  if(route.params.name) fetchPokemonByName(route.params.name)
+  else errorMessage.value='Nama Pokémon tidak ada'
 })
 </script>
 
 <style scoped>
-/* Jangan ubah style Anda */
-.home-switch > div {
-  transition: background-color 1s ease;
-}
-.home-switch-active {
-  font-weight: bold;
-}
-
-.type-grass {
-  background-color: #78c850;
-}
-.type-fire {
-  background-color: #f08030;
-}
-.type-water {
-  background-color: #6890f0;
-}
-.type-electric {
-  background-color: #f8d030;
-}
-.type-psychic {
-  background-color: #f85888;
-}
-.type-ice {
-  background-color: #98d8d8;
-}
-.type-dragon {
-  background-color: #7038f8;
-}
-.type-dark {
-  background-color: #705848;
-}
-.type-fairy {
-  background-color: #ee99ac;
-}
+/* jangan ubah styling */
+.home-switch>div{transition:background-color 1s ease}
+.home-switch-active{font-weight:bold}
+.type-grass{background-color:#78c850}
+.type-fire{background-color:#f08030}
+.type-water{background-color:#6890f0}
+.type-electric{background-color:#f8d030}
+.type-psychic{background-color:#f85888}
+.type-ice{background-color:#98d8d8}
+.type-dragon{background-color:#7038f8}
+.type-dark{background-color:#705848}
+.type-fairy{background-color:#ee99ac}
 </style>

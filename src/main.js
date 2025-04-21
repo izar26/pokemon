@@ -21,6 +21,11 @@ const routes = [
     name: 'Collection',
     component: Collection,
   },
+  {
+    path: '/pokemon/:id',
+    name: 'PokemonDetail',
+    component: () => import('./views/ProfilPokemon.vue')
+  },  
 ]
 
 const router = createRouter({

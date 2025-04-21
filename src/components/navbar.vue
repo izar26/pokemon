@@ -59,7 +59,7 @@ const catchCount = computed(() => collection.value.length)
           >
             <!-- Tombol tambahan untuk menuju halaman Collection -->
             <router-link to="/collection" class="flex items-center">
-              <p class="font-semi">{{ catchCount }} Collection</p>
+              <p class="font-semi">Collection</p>
               <img src="../assets/img/logo-catch.png" alt="collection" :class="classCatch" />
             </router-link>
           </div>
